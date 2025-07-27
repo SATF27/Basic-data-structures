@@ -29,7 +29,7 @@ class LinkedList(ABC):
     def __str__(self):
         pass
 
-    # this is supossed to link this list to another
+    # this is supossed to link the actual list to another
     @abstractmethod
     def __add__(self, other):
         pass
