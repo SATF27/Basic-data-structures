@@ -14,25 +14,31 @@ class SinglyLinkedList(LinkedList):
         new_node = Node(data)
         if self.is_empty():
             self._head = new_node
-            return self._head
+            return self._head.data
         current_node = self._head
         while current_node.next:
             current_node = current_node.next
         current_node.next = new_node
-        return current_node.next
+        return current_node.next.data
         
     def insert(self, index, data):  
         new_node = Node(data)
         if self.is_empty():
             raise Exception("empty list, items can't be inserted by index")
         self.check_index(index)
+        if index == 0:
+            new_node.next = self._head
+            self._head = new_node
+            return self._head.data
         counter = 0
         current_node = self._head
+        previous_node = None
         while current_node:
             if counter == index:
-                new_node.next = current_node.next
-                current_node.next = new_node
-                return new_node
+                new_node.next = current_node
+                previous_node.next = new_node
+                return new_node.data
+            previous_node = current_node
             current_node = current_node.next
             counter += 1
     
@@ -44,17 +50,17 @@ class SinglyLinkedList(LinkedList):
         if index == 0:
             previous_node = self._head
             self._head = self._head.next
-            return previous_node
+            return previous_node.data
         current_node = self._head
         counter = 0
         while current_node:
             if counter == index:
                 previous_node.next = current_node.next
-                return current_node
+                return current_node.data
             previous_node = current_node
             current_node = current_node.next
             counter += 1
-        raise Exception("while loop failed") # this should not raise never
+        raise Exception("while loop failed") # this never should raise
                 
     def __getitem__(self, index):
         self.check_index(index)
