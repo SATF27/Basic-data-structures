@@ -93,23 +93,16 @@ class SinglyLinkedList(LinkedList):
         return string_representation
     
     def __add__(self, other):
-        if self.is_empty():
-            raise Exception("can't concatenate an empty list")
-        current_node = self._head
         new_list = SinglyLinkedList()
-        while current_node:
-            new_list.append(current_node.data)
-            current_node = current_node.next
-        current_node = other._head
-        while current_node:
-            new_list.append(current_node.data)
-            current_node = current_node.next
+        for i in self:
+            new_list.append(i)
+        for i in other:
+            new_list.append(i)
         return new_list
     
     def __len__(self):
         length = 0
         current_node = self._head
-        while current_node:
+        for _ in self:
             length += 1
-            current_node = current_node.next
         return length

@@ -12,6 +12,7 @@ class Stack():
         previous = self.top
         self.top = new_node
         self.top.previous = previous
+        return self.top.data
 
     def pop(self):
         if self.top is None:
@@ -31,7 +32,7 @@ class Stack():
 
     def __len__(self):
         length = 0
-        for i in iter(self):
+        for _ in self:
             length += 1
         return length
     
